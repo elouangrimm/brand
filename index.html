@@ -77,9 +77,9 @@
 
         <section id="pfp">
             <h1>Profile Pictures</h1>
-            <p class="section-desc">Click to download. Right-click to save as. All variants of your pixel avatar.</p>
+            <p class="section-desc">Click to download. Right-click to save as.</p>
             <div id="pfp-grid" class="image-grid"></div>
-            <details class="originals-toggle">
+            <details class="originals-toggle"  style="display: none;">
                 <summary>Show Originals (higher res)</summary>
                 <div id="pfp-originals-grid" class="image-grid"></div>
             </details>
@@ -148,8 +148,8 @@
 
                     <div class="pfpgen-preview">
                         <canvas id="pfpgen-canvas" width="200" height="200"></canvas>
-                        <canvas id="pfpgen-banner-canvas" width="600" height="200"></canvas>
-                        <div class="download-row banner-dl-row">
+                        <canvas id="pfpgen-banner-canvas" width="600" height="200" style="display: none;"></canvas>
+                        <div class="download-row banner-dl-row" style="display: none;">
                             <button class="action-btn secondary" id="pfpgen-dl-banner">Download Banner</button>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
             <h1>Banners</h1>
             <p class="section-desc">Matching banners for each profile picture. Click to download.</p>
             <div id="banners-grid" class="banner-grid"></div>
-            <details class="originals-toggle">
+            <details class="originals-toggle" style="display: none;">
                 <summary>Show Originals (raw pixel art)</summary>
                 <div id="banners-originals-grid" class="banner-grid originals-pixelated"></div>
             </details>
@@ -223,10 +223,10 @@
                         </div>
                     </div>
 
-                    <div class="control-group">
+                    <!--<div class="control-group">
                         <label class="control-label">Presets</label>
                         <div id="card-presets" class="preset-row"></div>
-                    </div>
+                    </div>-->
 
                     <div class="card-export-row">
                         <button class="action-btn" id="card-download">Download PNG</button>

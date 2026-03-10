@@ -13,9 +13,9 @@
 
     "colors": {
         "primary": [
-            { "name": "Blue", "hex": "#3b82f6", "usage": "Primary accent, links, buttons" },
+            { "name": "Blue", "hex": "#3b82f6", "usage": "Primary accent, links" },
             { "name": "Dark Stone", "hex": "#0c0a09", "usage": "Background" },
-            { "name": "Stone 050", "hex": "#fafaf9", "usage": "White text" }
+            { "name": "Bright White", "hex": "#fafaf9", "usage": "White text" }
         ],
         "neutrals": [
             { "name": "Stone 950", "hex": "#0c0a09", "usage": "Background" },
@@ -46,7 +46,6 @@
         { "name": "Orange", "file": "assets/pfp/orange.png", "color": "#f59e0b" },
         { "name": "White", "file": "assets/pfp/white.png", "color": "#fafaf9" },
         { "name": "Black", "file": "assets/pfp/black.png", "color": "#0c0a09" },
-        { "name": "Blurple", "file": "assets/pfp/blurple.png", "color": "#5865f2" },
         { "name": "Dev Green", "file": "assets/pfp/dev_green.png", "color": "#22c55e" },
         { "name": "Dev Black", "file": "assets/pfp/dev_black.png", "color": "#0c0a09" },
         { "name": "Transparent (Dark)", "file": "assets/pfp/transparent_black.png", "color": "#0c0a09" },

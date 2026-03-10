@@ -824,7 +824,7 @@ function renderStore() {
 
     window.renderCard = renderCard;
 
-    function renderCardPresets() {
+    /* function renderCardPresets() {
         const presetsContainer = document.getElementById("card-presets");
         presetsContainer.innerHTML = "";
         if (!brandData || !brandData.projects) return;
@@ -861,6 +861,7 @@ function renderStore() {
     }
 
     window._renderCardPresets = renderCardPresets;
+    */
 })();
 
 

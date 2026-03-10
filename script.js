@@ -19,7 +19,18 @@ function showToast(msg) {
 
 async function copyText(text) {
     try {
-        await navigator.clipboard.writeText(text);
+        if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+        } else {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+        }
         showToast(`Copied: ${text}`);
     } catch {
         showToast("Copy failed");
@@ -541,6 +552,63 @@ function renderStore() {
     brandFetchBtn.addEventListener("click", fetchBrand);
     brandInput.addEventListener("keydown", (e) => { if (e.key === "Enter") fetchBrand(); });
 
+    const bannerCanvas = document.getElementById("pfpgen-banner-canvas");
+    const bannerCtx = bannerCanvas.getContext("2d");
+    const dlBanner = document.getElementById("pfpgen-dl-banner");
+
+    function renderBannerToCanvas(canvas, w, h) {
+        const c = canvas.getContext("2d");
+        canvas.width = w;
+        canvas.height = h;
+        c.imageSmoothingEnabled = false;
+
+        const { r, g, b } = hexToRgb(themeColor);
+        const intensity = noiseIntensity / 100;
+
+        const offscreen = document.createElement("canvas");
+        offscreen.width = w;
+        offscreen.height = h;
+        const oc = offscreen.getContext("2d");
+
+        const imgData = oc.createImageData(w, h);
+        const rng = mulberry32(42);
+        for (let y = 0; y < h; y++) {
+            for (let x = 0; x < w; x++) {
+                const i = (y * w + x) * 4;
+                const noise = (rng() - 0.5) * 2 * intensity * 80;
+                imgData.data[i]     = Math.max(0, Math.min(255, r + noise));
+                imgData.data[i + 1] = Math.max(0, Math.min(255, g + noise));
+                imgData.data[i + 2] = Math.max(0, Math.min(255, b + noise));
+                imgData.data[i + 3] = 255;
+            }
+        }
+        oc.putImageData(imgData, 0, 0);
+        c.drawImage(offscreen, 0, 0);
+    }
+
+    function bannerRender() {
+        resolveVariant();
+        renderBannerToCanvas(bannerCanvas, 600, 200);
+    }
+
+    function bannerDownload() {
+        resolveVariant();
+        const offCanvas = document.createElement("canvas");
+        renderBannerToCanvas(offCanvas, 1500, 500);
+        const link = document.createElement("a");
+        link.download = pfpBrandName ? `${pfpBrandName}_banner.png` : "banner_1500x500.png";
+        link.href = offCanvas.toDataURL("image/png");
+        link.click();
+    }
+
+    dlBanner.addEventListener("click", bannerDownload);
+
+    const origPfpRender = pfpRender;
+    pfpRender = function() {
+        origPfpRender();
+        bannerRender();
+    };
+
     pfpRender();
 })();
 
@@ -646,9 +714,9 @@ function renderStore() {
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, w, h);
 
-        const padding = w * 0.06;
-        const logoSize = Math.min(h * 0.65, w * 0.25);
-        const logoX = padding + logoSize * 0.15;
+        const padding = w * 0.04;
+        const logoSize = Math.min(h * 0.6, w * 0.22);
+        const logoX = padding * 1.5;
         const logoY = (h - logoSize) / 2;
 
         if (logoImg) {
@@ -666,42 +734,55 @@ function renderStore() {
             ctx.restore();
         }
 
-        const textX = logoImg ? logoX + logoSize + padding * 0.8 : padding;
-        const textAreaW = w - textX - padding;
+        const textX = logoImg ? logoX + logoSize + padding * 1.2 : padding * 1.5;
+        const textAreaW = w - textX - padding * 1.5;
 
-        const titleFontSize = fitFontSize(ctx, titleText, textAreaW, h * 0.22, "bold", true);
-        ctx.font = `bold ${titleFontSize}px "JetBrains Mono", "SF Mono", monospace`;
+        const maxTitleSize = Math.min(h * 0.18, w * 0.1);
+        const titleFamily = '"JetBrains Mono", "SF Mono", monospace';
+        let titleFontSize = maxTitleSize;
+        ctx.font = `bold ${titleFontSize}px ${titleFamily}`;
+        let titleLines = wrapText(ctx, titleText, textAreaW);
+        while (titleLines.length > 2 && titleFontSize > 16) {
+            titleFontSize -= 2;
+            ctx.font = `bold ${titleFontSize}px ${titleFamily}`;
+            titleLines = wrapText(ctx, titleText, textAreaW);
+        }
+
+        const subFamily = '"JetBrains Mono", "SF Mono", monospace';
+        let subFontSize = Math.min(h * 0.09, titleFontSize * 0.55);
+        ctx.font = `${subFontSize}px ${subFamily}`;
+        let subLines = subtitleText ? wrapText(ctx, subtitleText, textAreaW) : [];
+        while (subLines.length > 3 && subFontSize > 12) {
+            subFontSize -= 2;
+            ctx.font = `${subFontSize}px ${subFamily}`;
+            subLines = wrapText(ctx, subtitleText, textAreaW);
+        }
+
+        const titleBlockH = titleLines.length * titleFontSize * 1.15;
+        const gap = subtitleText ? h * 0.025 : 0;
+        const subBlockH = subLines.length * subFontSize * 1.4;
+        const totalH = titleBlockH + gap + subBlockH;
+        const startY = (h - totalH) / 2;
+
+        ctx.font = `bold ${titleFontSize}px ${titleFamily}`;
         ctx.fillStyle = titleColor;
-        ctx.textBaseline = "bottom";
+        ctx.textBaseline = "top";
+        let ty = startY;
+        titleLines.forEach((line) => {
+            ctx.fillText(line, textX, ty);
+            ty += titleFontSize * 1.15;
+        });
 
-        const centerY = h / 2;
-        const titleY = subtitleText ? centerY - h * 0.02 : centerY + titleFontSize * 0.35;
-        ctx.fillText(titleText, textX, titleY);
-
-        if (subtitleText) {
-            const subFontSize = fitFontSize(ctx, subtitleText, textAreaW, h * 0.12, "normal", false);
-            ctx.font = `${subFontSize}px "JetBrains Mono", "SF Mono", monospace`;
+        if (subtitleText && subLines.length) {
+            ctx.font = `${subFontSize}px ${subFamily}`;
             ctx.fillStyle = subtitleColor;
             ctx.textBaseline = "top";
-
-            const lines = wrapText(ctx, subtitleText, textAreaW);
-            let lineY = titleY + h * 0.03;
-            lines.forEach((line) => {
-                ctx.fillText(line, textX, lineY);
-                lineY += subFontSize * 1.4;
+            let sy = ty + gap;
+            subLines.forEach((line) => {
+                ctx.fillText(line, textX, sy);
+                sy += subFontSize * 1.4;
             });
         }
-    }
-
-    function fitFontSize(ctx, text, maxW, maxH, weight, isMono) {
-        let size = maxH;
-        const family = isMono ? '"JetBrains Mono", "SF Mono", monospace' : '-apple-system, sans-serif';
-        while (size > 12) {
-            ctx.font = `${weight} ${size}px ${family}`;
-            if (ctx.measureText(text).width <= maxW) return size;
-            size -= 2;
-        }
-        return size;
     }
 
     function wrapText(ctx, text, maxW) {
@@ -798,6 +879,24 @@ function renderStore() {
     }, { rootMargin: "-20% 0px -60% 0px" });
 
     sections.forEach((section) => observer.observe(section));
+
+    const content = document.getElementById("content");
+    content.addEventListener("scroll", () => {
+        if (content.scrollTop + content.clientHeight >= content.scrollHeight - 40) {
+            const lastSection = sections[sections.length - 1];
+            navLinks.forEach((link) => {
+                link.classList.toggle("active", link.dataset.section === lastSection.id);
+            });
+        }
+    });
+    window.addEventListener("scroll", () => {
+        if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 40) {
+            const lastSection = sections[sections.length - 1];
+            navLinks.forEach((link) => {
+                link.classList.toggle("active", link.dataset.section === lastSection.id);
+            });
+        }
+    });
 
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {

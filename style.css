@@ -240,6 +240,7 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 12px;
+    align-items: start;
 }
 
 .swatch {
@@ -258,6 +259,7 @@ section {
 .swatch-color {
     height: 64px;
     width: 100%;
+    border-bottom: 1px solid var(--border);
 }
 
 .swatch-info {
@@ -439,19 +441,39 @@ section {
     min-width: 0;
 }
 
+#pfpgen-canvas {
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#pfpgen-banner-canvas {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    margin-top: 12px;
+}
+
+.banner-dl-row {
+    margin-top: 8px;
+    justify-content: center;
+}
+
 .pfpgen-preview {
     flex-shrink: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     background-color: var(--bg-surface);
     border: 1px solid var(--border);
     padding: 16px;
 }
 
-#pfpgen-canvas {
-    width: 200px;
-    height: 200px;
+.originals-pixelated img {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
 }
@@ -871,6 +893,24 @@ section {
 .preset-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
+}
+
+#card-title,
+#card-subtitle {
+    width: 100%;
+    padding: 8px 10px;
+    background-color: var(--bg);
+    border: 1px solid var(--border-strong);
+    color: var(--text-bright);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+}
+
+#card-title:focus,
+#card-subtitle:focus {
+    outline: none;
+    border-color: var(--accent);
 }
 
 .card-export-row {

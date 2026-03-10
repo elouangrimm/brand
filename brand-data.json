@@ -14,7 +14,8 @@
     "colors": {
         "primary": [
             { "name": "Blue", "hex": "#3b82f6", "usage": "Primary accent, links, buttons" },
-            { "name": "Blue Hover", "hex": "#5193f8", "usage": "Hover states" }
+            { "name": "Dark Stone", "hex": "#0c0a09", "usage": "Background" },
+            { "name": "Stone 050", "hex": "#fafaf9", "usage": "White text" }
         ],
         "neutrals": [
             { "name": "Stone 950", "hex": "#0c0a09", "usage": "Background" },

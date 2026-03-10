@@ -25,7 +25,7 @@
     <nav id="sidebar">
         <div id="sidebar-header">
             <span id="sidebar-title">brand</span>
-            <span id="sidebar-dot">.elouan.xyz</span>
+            <span id="sidebar-dot"><a href="https://elouan.xyz/">.elouan.xyz</a></span>
         </div>
         <ul id="sidebar-nav">
             <li><a href="#colors" class="nav-link active" data-section="colors">Colors</a></li>
@@ -37,7 +37,7 @@
             <li><a href="#store" class="nav-link" data-section="store">Image Store</a></li>
         </ul>
         <div id="sidebar-footer">
-            <a href="https://elouan.xyz" target="_blank">elouan.xyz</a>
+            <a href="https://elouan.xyz" target="_blank">elouan.xyz</a>·
             <a href="https://github.com/elouangrimm" target="_blank">github</a>
         </div>
     </nav>
@@ -148,6 +148,10 @@
 
                     <div class="pfpgen-preview">
                         <canvas id="pfpgen-canvas" width="200" height="200"></canvas>
+                        <canvas id="pfpgen-banner-canvas" width="600" height="200"></canvas>
+                        <div class="download-row banner-dl-row">
+                            <button class="action-btn secondary" id="pfpgen-dl-banner">Download Banner</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,8 +162,8 @@
             <p class="section-desc">Matching banners for each profile picture. Click to download.</p>
             <div id="banners-grid" class="banner-grid"></div>
             <details class="originals-toggle">
-                <summary>Show Originals</summary>
-                <div id="banners-originals-grid" class="banner-grid"></div>
+                <summary>Show Originals (raw pixel art)</summary>
+                <div id="banners-originals-grid" class="banner-grid originals-pixelated"></div>
             </details>
         </section>
 

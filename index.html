@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Brand kit and asset manager for Elouan Grimm. Colors, profile pictures, banners, card generator, fonts, and more.">
+    <meta name="author" content="Elouan Grimm">
+
+    <meta property="og:title" content="brand.elouan.xyz">
+    <meta property="og:description" content="Brand kit and asset manager for Elouan Grimm">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brand.elouan.xyz">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="brand.elouan.xyz">
+    <meta name="twitter:description" content="Brand kit and asset manager for Elouan Grimm">
+
+    <title>brand.elouan.xyz</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230c0a09'/><rect x='15' y='15' width='70' height='70' fill='%233b82f6'/><rect x='25' y='25' width='50' height='50' fill='%230c0a09'/></svg>">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav id="sidebar">
+        <div id="sidebar-header">
+            <span id="sidebar-title">brand</span>
+            <span id="sidebar-dot">.elouan.xyz</span>
+        </div>
+        <ul id="sidebar-nav">
+            <li><a href="#colors" class="nav-link active" data-section="colors">Colors</a></li>
+            <li><a href="#pfp" class="nav-link" data-section="pfp">Profile Pictures</a></li>
+            <li><a href="#pfpgen" class="nav-link" data-section="pfpgen">PFP Generator</a></li>
+            <li><a href="#banners" class="nav-link" data-section="banners">Banners</a></li>
+            <li><a href="#cards" class="nav-link" data-section="cards">Card Generator</a></li>
+            <li><a href="#fonts" class="nav-link" data-section="fonts">Fonts</a></li>
+            <li><a href="#store" class="nav-link" data-section="store">Image Store</a></li>
+        </ul>
+        <div id="sidebar-footer">
+            <a href="https://elouan.xyz" target="_blank">elouan.xyz</a>
+            <a href="https://github.com/elouangrimm" target="_blank">github</a>
+        </div>
+    </nav>
+
+    <button id="mobile-nav-toggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <main id="content">
+
+        <section id="colors">
+            <h1>Colors</h1>
+            <p class="section-desc">Click any swatch to copy the hex value. Your design system palette.</p>
+
+            <div id="colors-primary" class="color-group">
+                <h2>Primary</h2>
+                <div class="swatch-grid" data-group="primary"></div>
+            </div>
+
+            <div id="colors-neutrals" class="color-group">
+                <h2>Neutrals</h2>
+                <div class="swatch-grid" data-group="neutrals"></div>
+            </div>
+
+            <div id="colors-semantic" class="color-group">
+                <h2>Semantic</h2>
+                <div class="swatch-grid" data-group="semantic"></div>
+            </div>
+
+            <div id="css-vars-export">
+                <h2>CSS Variables</h2>
+                <button id="copy-css-vars" class="action-btn">Copy All as CSS Variables</button>
+            </div>
+        </section>
+
+        <section id="pfp">
+            <h1>Profile Pictures</h1>
+            <p class="section-desc">Click to download. Right-click to save as. All variants of your pixel avatar.</p>
+            <div id="pfp-grid" class="image-grid"></div>
+            <details class="originals-toggle">
+                <summary>Show Originals (higher res)</summary>
+                <div id="pfp-originals-grid" class="image-grid"></div>
+            </details>
+        </section>
+
+        <section id="pfpgen">
+            <h1>PFP Generator</h1>
+            <p class="section-desc">Generate new profile pictures with any color. Embedded from <a href="https://pfpgen.e5g.dev" target="_blank">pfpgen.e5g.dev</a>.</p>
+
+            <div id="pfpgen-tool">
+                <div class="pfpgen-row">
+                    <div class="pfpgen-controls">
+                        <div class="control-group">
+                            <label class="control-label">Base</label>
+                            <div class="variant-group">
+                                <button class="variant-btn active" data-variant="auto">Auto</button>
+                                <button class="variant-btn" data-variant="dark">Dark Shirt</button>
+                                <button class="variant-btn" data-variant="light">White Shirt</button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Brand Lookup</label>
+                            <div class="brand-row">
+                                <input type="text" id="pfpgen-brand-input" placeholder="e.g. spotify or stripe.com" spellcheck="false">
+                                <button class="action-btn" id="pfpgen-brand-fetch">Fetch</button>
+                            </div>
+                            <div id="pfpgen-brand-status"></div>
+                            <div id="pfpgen-brand-colors"></div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Theme Color</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="pfpgen-color-picker" value="#3b82f6">
+                                <input type="text" id="pfpgen-color-hex" value="#3b82f6" maxlength="7" spellcheck="false">
+                            </div>
+                            <div class="noise-row">
+                                <label class="control-label small">Noise</label>
+                                <input type="range" id="pfpgen-noise" min="0" max="100" value="18">
+                                <span id="pfpgen-noise-val">18%</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Download</label>
+                            <div class="download-row">
+                                <button class="action-btn" id="pfpgen-dl-original">20×20</button>
+                                <button class="action-btn" id="pfpgen-dl-1000">1000×1000</button>
+                            </div>
+                            <div class="custom-dl-row">
+                                <input type="number" id="pfpgen-custom-size" value="512" min="20" max="4096" placeholder="Custom size">
+                                <button class="action-btn secondary" id="pfpgen-dl-custom">Download</button>
+                            </div>
+                        </div>
+
+                        <details id="pfpgen-api-settings">
+                            <summary class="control-label clickable">API Settings</summary>
+                            <div class="api-key-row">
+                                <input type="password" id="pfpgen-api-key" placeholder="brand.dev API key" spellcheck="false">
+                                <button class="action-btn secondary" id="pfpgen-save-key">Save</button>
+                            </div>
+                            <p class="api-hint">Free key (50 req) at <a href="https://www.brand.dev/signup" target="_blank">brand.dev</a></p>
+                        </details>
+                    </div>
+
+                    <div class="pfpgen-preview">
+                        <canvas id="pfpgen-canvas" width="200" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="banners">
+            <h1>Banners</h1>
+            <p class="section-desc">Matching banners for each profile picture. Click to download.</p>
+            <div id="banners-grid" class="banner-grid"></div>
+            <details class="originals-toggle">
+                <summary>Show Originals</summary>
+                <div id="banners-originals-grid" class="banner-grid"></div>
+            </details>
+        </section>
+
+        <section id="cards">
+            <h1>Card Generator</h1>
+            <p class="section-desc">Create branded project cards. Upload a logo, customize text and colors, then export.</p>
+
+            <div id="card-tool">
+                <div class="card-controls">
+                    <div class="card-controls-grid">
+                        <div class="control-group">
+                            <label class="control-label">Logo</label>
+                            <div class="logo-upload-area" id="card-logo-drop">
+                                <input type="file" id="card-logo-input" accept="image/*" hidden>
+                                <span id="card-logo-label">Drop or click to upload</span>
+                            </div>
+                            <label class="control-label small">Logo Shape</label>
+                            <div class="variant-group">
+                                <button class="card-shape-btn active" data-shape="circle">Circle</button>
+                                <button class="card-shape-btn" data-shape="rounded">Rounded</button>
+                                <button class="card-shape-btn" data-shape="square">Square</button>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Title Text</label>
+                            <input type="text" id="card-title" value="project" placeholder="Project name" spellcheck="false">
+                            <label class="control-label small">Title Color</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="card-title-color" value="#3b82f6">
+                                <input type="text" id="card-title-color-hex" value="#3b82f6" maxlength="7" spellcheck="false">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Subtitle Text</label>
+                            <input type="text" id="card-subtitle" value="description here" placeholder="Tagline" spellcheck="false">
+                            <label class="control-label small">Subtitle Color</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="card-subtitle-color" value="#fafaf9">
+                                <input type="text" id="card-subtitle-color-hex" value="#fafaf9" maxlength="7" spellcheck="false">
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Background</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="card-bg-color" value="#0c0a09">
+                                <input type="text" id="card-bg-color-hex" value="#0c0a09" maxlength="7" spellcheck="false">
+                            </div>
+                            <label class="control-label small">Size</label>
+                            <div class="size-inputs">
+                                <input type="number" id="card-width" value="1200" min="400" max="3000" placeholder="Width">
+                                <span class="size-sep">×</span>
+                                <input type="number" id="card-height" value="630" min="200" max="2000" placeholder="Height">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Presets</label>
+                        <div id="card-presets" class="preset-row"></div>
+                    </div>
+
+                    <div class="card-export-row">
+                        <button class="action-btn" id="card-download">Download PNG</button>
+                        <button class="action-btn secondary" id="card-copy">Copy to Clipboard</button>
+                    </div>
+                </div>
+
+                <div class="card-preview-wrap">
+                    <canvas id="card-canvas" width="1200" height="630"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="fonts">
+            <h1>Fonts</h1>
+            <p class="section-desc">Typography used across all projects. Download or copy the font stack.</p>
+            <div id="fonts-list"></div>
+        </section>
+
+        <section id="store">
+            <h1>Image Store</h1>
+            <p class="section-desc">Misc brand images. Left-click to copy to clipboard, right-click to download.</p>
+            <div class="store-filter">
+                <input type="text" id="store-search" placeholder="Filter by name or tag..." spellcheck="false">
+            </div>
+            <div id="store-grid" class="image-grid"></div>
+        </section>
+
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

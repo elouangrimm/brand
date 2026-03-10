@@ -1,0 +1,123 @@
+{
+    "meta": {
+        "name": "Elouan Grimm",
+        "handle": "elouangrimm",
+        "domain": "elouan.xyz",
+        "tagline": "Brand Kit & Asset Manager",
+        "links": {
+            "website": "https://elouan.xyz",
+            "github": "https://github.com/elouangrimm",
+            "pfpgen": "https://pfpgen.e5g.dev"
+        }
+    },
+
+    "colors": {
+        "primary": [
+            { "name": "Blue", "hex": "#3b82f6", "usage": "Primary accent, links, buttons" },
+            { "name": "Blue Hover", "hex": "#5193f8", "usage": "Hover states" }
+        ],
+        "neutrals": [
+            { "name": "Stone 950", "hex": "#0c0a09", "usage": "Background" },
+            { "name": "Stone 900", "hex": "#1c1917", "usage": "Raised background" },
+            { "name": "Stone 800", "hex": "#292524", "usage": "Surface / borders" },
+            { "name": "Stone 700", "hex": "#44403c", "usage": "Subtle borders" },
+            { "name": "Stone 600", "hex": "#57534e", "usage": "Disabled" },
+            { "name": "Stone 500", "hex": "#78716c", "usage": "Faint text" },
+            { "name": "Stone 400", "hex": "#a8a29e", "usage": "Muted text" },
+            { "name": "Stone 300", "hex": "#d6d3d1", "usage": "Secondary text" },
+            { "name": "Stone 200", "hex": "#e7e5e4", "usage": "Body text" },
+            { "name": "Stone 100", "hex": "#f5f5f4", "usage": "Bright text" },
+            { "name": "Stone 050", "hex": "#fafaf9", "usage": "White text" }
+        ],
+        "semantic": [
+            { "name": "Red", "hex": "#ef4444", "usage": "Error / danger" },
+            { "name": "Green", "hex": "#22c55e", "usage": "Success" },
+            { "name": "Amber", "hex": "#f59e0b", "usage": "Warning" },
+            { "name": "Indigo", "hex": "#6366f1", "usage": "Info / special" }
+        ]
+    },
+
+    "profilePictures": [
+        { "name": "Blue", "file": "assets/pfp/blue.png", "color": "#3b82f6" },
+        { "name": "Green", "file": "assets/pfp/green.png", "color": "#22c55e" },
+        { "name": "Purple", "file": "assets/pfp/purple.png", "color": "#6366f1" },
+        { "name": "Red", "file": "assets/pfp/red.png", "color": "#ef4444" },
+        { "name": "Orange", "file": "assets/pfp/orange.png", "color": "#f59e0b" },
+        { "name": "White", "file": "assets/pfp/white.png", "color": "#fafaf9" },
+        { "name": "Black", "file": "assets/pfp/black.png", "color": "#0c0a09" },
+        { "name": "Blurple", "file": "assets/pfp/blurple.png", "color": "#5865f2" },
+        { "name": "Dev Green", "file": "assets/pfp/dev_green.png", "color": "#22c55e" },
+        { "name": "Dev Black", "file": "assets/pfp/dev_black.png", "color": "#0c0a09" },
+        { "name": "Transparent (Dark)", "file": "assets/pfp/transparent_black.png", "color": "#0c0a09" },
+        { "name": "Transparent (Light)", "file": "assets/pfp/transparent_white.png", "color": "#fafaf9" }
+    ],
+
+    "banners": [
+        { "name": "Blue", "file": "assets/banners/blue.png", "matchesPfp": "Blue" },
+        { "name": "Green", "file": "assets/banners/green.png", "matchesPfp": "Green" },
+        { "name": "Purple", "file": "assets/banners/purple.png", "matchesPfp": "Purple" },
+        { "name": "Red", "file": "assets/banners/red.png", "matchesPfp": "Red" },
+        { "name": "Orange", "file": "assets/banners/orange.png", "matchesPfp": "Orange" },
+        { "name": "White", "file": "assets/banners/white.png", "matchesPfp": "White" }
+    ],
+
+    "fonts": [
+        {
+            "name": "JetBrains Mono",
+            "usage": "Headings, code, UI elements",
+            "weights": ["Regular", "Bold", "Italic"],
+            "url": "https://github.com/JetBrains/JetBrainsMono/releases/latest",
+            "preview": "ABCDEFGHIJKLM 0123456789",
+            "stack": "\"JetBrains Mono\", \"SF Mono\", \"Fira Code\", monospace"
+        },
+        {
+            "name": "Inter",
+            "usage": "Body text, UI labels",
+            "weights": ["Regular", "Medium", "Bold"],
+            "url": "https://github.com/rsms/inter/releases/latest",
+            "preview": "The quick brown fox jumps over the lazy dog",
+            "stack": "\"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+        }
+    ],
+
+    "cardDefaults": {
+        "bgColor": "#0c0a09",
+        "titleColor": "#3b82f6",
+        "subtitleColor": "#fafaf9",
+        "width": 1200,
+        "height": 630,
+        "logoSize": 280,
+        "titleFontSize": 120,
+        "subtitleFontSize": 56
+    },
+
+    "projects": [
+        {
+            "name": "tasks",
+            "subtitle": "simple tasks manager",
+            "logo": "assets/logos/tasks.png",
+            "url": "https://tasks.e5g.dev",
+            "color": "#3b82f6"
+        },
+        {
+            "name": "CnVrt",
+            "subtitle": "universal file converter",
+            "logo": "assets/logos/cnvrt.png",
+            "url": "https://cnvrt.e5g.dev",
+            "color": "#3b82f6"
+        },
+        {
+            "name": "elouan.xyz",
+            "subtitle": "personal site",
+            "logo": "assets/pfp/blue.png",
+            "url": "https://elouan.xyz",
+            "color": "#3b82f6"
+        }
+    ],
+
+    "miscImages": [
+        { "name": "Blue PFP", "file": "assets/pfp/blue.png", "tags": ["pfp", "blue"] },
+        { "name": "Banner Blue", "file": "assets/banners/blue.png", "tags": ["banner", "blue"] },
+        { "name": "Banner Green", "file": "assets/banners/green.png", "tags": ["banner", "green"] }
+    ]
+}
